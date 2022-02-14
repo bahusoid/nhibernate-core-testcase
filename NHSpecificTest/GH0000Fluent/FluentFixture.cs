@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Linq;
 using FluentNHibernate.Cfg;
 using NHibernate.Cfg;
@@ -12,16 +13,21 @@ namespace NHibernate.Test.NHSpecificTest.GH0000Fluent
 	[TestFixture]
 	public class FluentFixture : TestCase
 	{
+		private string _hbmMapping;
 		protected override string[] Mappings => Array.Empty<string>();
 
 		protected override void AddMappings(Configuration configuration)
 		{
+			var stringWriter = new StringWriter();
 			Fluently.Configure(configuration)
 				.Mappings(x =>
 					x.FluentMappings
+						//.AddFromAssemblyOf<EntityMap>()
 						.Add<EntityMap>()
+						.ExportTo(stringWriter)
 				)
 				.BuildConfiguration();
+			_hbmMapping = stringWriter.ToString();
 		}
 
 		protected override void OnSetUp()
