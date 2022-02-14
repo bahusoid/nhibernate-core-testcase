@@ -24,6 +24,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="FluentNHibernate" Version="3.1.0" />
     <PackageReference Include="NHibernate" Version="5.3.10" />
     <PackageReference Include="log4net" Version="2.0.14" />
     <PackageReference Include="Microsoft.AspNetCore.OData" Version="7.5.12" />
